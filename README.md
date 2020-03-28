@@ -1,29 +1,5 @@
-# timelineviewcomp
+# The TimelineView Component
 
-## Project setup
-```
-npm install
-```
+### This app demonstrates the use of the TimelineView component.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### It also demonstrates the use of the TimeAxisView component.
