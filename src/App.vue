@@ -42,6 +42,7 @@
   font-weight: bold;
 }
 #app-nav {
+  background-color: cornsilk;
   border-bottom: 1px solid gray;
 }
 #app-nav a {

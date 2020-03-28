@@ -19,6 +19,12 @@
       "plugin:vue/essential",
       "eslint:recommended",
       // "@vue/prettier"
+ * local to github repository:
+   - create new github repo without README or gitignore
+   - copy URL of new repo
+   - git remote add origin <remote repository URL>
+   - check remote URL: git remote -v
+   - git push origin master
 
 #### Thu Mar 26
 
