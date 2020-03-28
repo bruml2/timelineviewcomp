@@ -1,5 +1,6 @@
 <template>
   <div class="timeline">
+    <h2>Examples of the use of the TimelineView component</h2>
     <div class="timelineView">
       <div class="desc">This is a default TimelineView component; timeline prop is {}: </div>
       <!-- must bind to signal that value is JS not a string -->
@@ -28,6 +29,7 @@ export default {
 
 <style>
 .timeline {
+  margin: 10px 30px;
   text-align: center;
 }
 .desc {

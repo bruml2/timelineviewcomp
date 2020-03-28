@@ -30,6 +30,7 @@ export default {
   data() {
     return {
       rootEl: undefined,
+      // any changes must also be in TimeAxis.vue view;
       timeAxisObj: {
         startYear: 1900,
         stopYear: 2000,

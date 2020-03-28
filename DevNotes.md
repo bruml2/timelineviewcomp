@@ -4,7 +4,8 @@
 
 #### Sat Mar 28
 
- * set up github repo for timelineview comp
+ * move defaults to rendering methods;
+   - drawTimeAxis should be callable without all defaults;
 
 #### Fri Mar 27
 
