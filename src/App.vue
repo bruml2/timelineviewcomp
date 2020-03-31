@@ -3,14 +3,15 @@
     <div id="app-nav">
       <img alt="Ruml portrait" src="@/assets/self-villa2013.20k.jpg" width="60">
       <span id="app-title">The TimelineView Component</span>
-      <span id="app-links">
+      <div id="app-links">
         <!-- router/index.js: the views/*vue component to display for each route; -->
         <router-link to="/">Home</router-link> |
         <router-link to="/timeline">TimelineView Comp</router-link> |
-        <router-link to="/timeAxis">TimeAxisView Comp</router-link> |
+        <router-link to="/timeAxis">TimeAxisView Comp</router-link> <br />
+        <router-link to="/objProps">ObjPropsView Comp</router-link> |
         <router-link to="/concepts">Timeline Concepts</router-link> |
         <router-link to="/docs">Documentation</router-link>
-      </span>
+      </div>
     </div>
     <transition name="fade" appear> <!-- name prefixes classes -->
       <router-view />
@@ -44,11 +45,18 @@
   background-color: cornsilk;
   border-bottom: 1px solid gray;
 }
-#app-nav a {
+#app-links {
+  text-align: center;
+  line-height: 1.6;
+}
+#app-links a {
   font-weight: bold;
   color: #2c3e50;
 }
-#app-nav a.router-link-exact-active {
+#app-links a:hover {
+  color: blue;
+}
+#app-links a.router-link-exact-active {
   color: #42b983;
 }
 .fade-enter-active, .fade-leave-active {

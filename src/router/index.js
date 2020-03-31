@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Home     from '../views/Home.vue'
 import Timeline from '../views/Timeline.vue'
 import TimeAxis from '../views/TimeAxis.vue'
+import ObjProps from '../views/ObjProps.vue'
 import Concepts from '../views/Concepts.vue'
 import Documentation from '../views/Documentation.vue'
 
@@ -24,6 +25,11 @@ const routes = [
     path: '/timeAxis',
     name: 'TimeAxis',
     component: TimeAxis
+  },
+  {
+    path: '/objProps',
+    name: 'ObjProps',
+    component: ObjProps
   },
   {
     path: '/concepts',
