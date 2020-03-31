@@ -1,4 +1,4 @@
-/* TimeAxisMixin.js  v. 0.2  Mar 26 2020 */
+/* TimeAxisMixin.js  v. 0.3  Mar 28 2020 */
 import * as d3 from "d3";
 
 export const TimeAxisMixin = {
@@ -54,6 +54,11 @@ export const TimeAxisMixin = {
       // .tickSize(tl.timeAxisTickSize);
     },
     drawTimeAxis(tl, axisContainerDiv, verticalSVGOffset) {
+      if (!tl.timeAxisPropsValid) {
+        const reqProps = [ "startYear", "stopYear", "tickInterval"]
+        reqProps.push("foo")
+        tl.timeAxisPropsValid = true
+      }
       // uses tl.startYear, tl.stopYear, tl.tickInterval;
       tl.timeScaleFn = this.getTimeScaleFn(tl);
       // must have tl.timeScaleFn;

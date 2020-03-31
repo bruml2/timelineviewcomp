@@ -2,6 +2,14 @@
 
 ### Work Plan
 
+#### Wed Apr ?  
+
+ * 3:30p Vue Basics https://www.youtube.com/watch?v=XItC-JBL3kw&feature=youtu.be
+
+#### Tue Mar 31
+
+ * separate component to display properties of an object (tl)
+
 #### Sat Mar 28
 
  * move defaults to rendering methods;
@@ -43,3 +51,5 @@ See https://github.com/jest-community/eslint-plugin-jest
 ### Follow-up
 
 Posterization with imagemagick
+JS for DOM manipulation: https://htmldom.dev/
+Excellent fast canvas-based line graphs, etc. https://github.com/leeoniya/uPlot
