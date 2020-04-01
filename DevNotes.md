@@ -2,13 +2,10 @@
 
 ### Work Plan
 
-#### Wed Apr ?  
+#### Wed Apr 1  
 
- * 3:30p Vue Basics https://www.youtube.com/watch?v=XItC-JBL3kw&feature=youtu.be
-
-#### Tue Mar 31
-
- * separate component to display properties of an object (tl)
+ * find code block component
+ * explore echart component
 
 #### Sat Mar 28
 
@@ -50,6 +47,13 @@ See https://github.com/jest-community/eslint-plugin-jest
 
 ### Follow-up
 
+https://marozed.ma/vue-cheatsheet with links to documentation
 Posterization with imagemagick
 JS for DOM manipulation: https://htmldom.dev/
 Excellent fast canvas-based line graphs, etc. https://github.com/leeoniya/uPlot
+
+### Echarts
+
+https://github.com/ecomfe/awesome-echarts
+Echart timelines: https://echarts.apache.org/en/option.html#timeline
+echart vue component: https://github.com/xlsdg/vue-echarts-v3

@@ -20,9 +20,16 @@ export default {
   },
   data() {
     return {
+      foo: {}
     }
   },
+  async created() {
+    this.foo = await this.getFoo()
+  },
   methods: {
+    getFoo() {
+      console.log("getFoo called")
+    }
   }
 }
 </script>

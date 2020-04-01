@@ -2,14 +2,24 @@ import { mount } from '@vue/test-utils'
 import { ObjPropsView } from '../../src/components/ObjPropsView.js'
 
 describe('ObjPropsView component', () => {
-  const Component = {
-    render() {},
-    mixins: [TimeAxisMixin]
-  }
-  const wrapper = mount(Component)
+  // mount with props??
+  const wrapper = mount(ObjPropsView)
 
-  test('on boundaries', () => {
-    const tl = {startYear: 1900, stopYear: 2000, tickInterval: 10}
-    const ret = wrapper.vm.getTickValues(tl)
-    expect(ret).toEqual([1900, 1910, 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000])
+  console.log(wrapper)
+
+  it('renders the correct markup', () => {
+    expect(wrapper.html()).toContain('<span class="count">0</span>')
   })
+
+  // it's also easy to check for the existence of elements
+  it('has a button', () => {
+    expect(wrapper.contains('button')).toBe(true)
+  })
+
+  it('button should increment the count', () => {
+    expect(wrapper.vm.count).toBe(0)
+    const button = wrapper.find('button')
+    button.trigger('click')
+    expect(wrapper.vm.count).toBe(1)
+  })
+})

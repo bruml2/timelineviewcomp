@@ -1,14 +1,20 @@
 <template>
   <div class="objPropsView">
     <h3>This page demonstrates the <b>ObjPropsView</b> component.</h3>
+    <div class="codeblock">
+      <pre>
+        {{ codeBlock }}
+      </pre>
+    </div>
     <ObjPropsView :showObjProps="true" :obj="tl">
+      <!-- all styling of slot must be passed in -->
       <div style="text-align: center">
         This text goes in the slot.
       </div>
     </ObjPropsView>
     <div class="btnContainer">
       <button v-if="showAddBtn" @click="addToTl">Click to add a new property to <i>tl</i></button>
-      <button v-else @click="resetTl" >No more properties to add! &nbsp; <span style="color: red;">RESET</span></button>
+      <button v-else @click="resetTl">No more properties to add! &nbsp; <span style="color: red;">RESET</span></button>
     </div>
   </div>
 </template>
@@ -41,7 +47,15 @@ data() {
           "eraHeight":      320, 
           "timeAxisHeight": 50,
     },
-    showAddBtn: true
+    showAddBtn: true,
+    codeBlock: `
+      <ObjPropsView :showObjProps="true" :obj="tl">
+        <!-- all styling of slot must be passed in -->
+        <div style="text-align: center">
+          This text goes in the slot.
+        </div>
+      </ObjPropsView>
+`
   }
 },
 created() {
@@ -50,19 +64,18 @@ created() {
 },
 methods: {
   addToTl() {
-    if (Object.keys(this.additions).length == 0) {
-      this.showAddBtn = false
-      return
-    }
     const firstKey = Object.keys(this.additions)[0]
     // firstKey is a string: requires subscript notation (dot won't work);
-    console.log(`Moving: ${firstKey} with value: ${this.additions[firstKey]}`)
+    // console.log(`Moving: ${firstKey} with value: ${this.additions[firstKey]}`)
     let newObj = {}
     newObj[firstKey] = this.additions[firstKey]
+    // adding a new property to a prop object is not reactive!!
+    //   must assign to object reference;
     this.tl = Object.assign({}, this.tl, newObj)
     delete this.additions[firstKey]
-    console.log(`length of additions: ${Object.keys(this.additions).length}`)
-    console.log(`length of tl: ${Object.keys(this.tl).length}`)
+    if (Object.keys(this.additions).length == 0) { this.showAddBtn = false }
+    // console.log(`length of additions: ${Object.keys(this.additions).length}`)
+    // console.log(`length of tl: ${Object.keys(this.tl).length}`)
   },
   resetTl() {
     this.tl = {
@@ -79,6 +92,10 @@ methods: {
 </script>
 
 <style scoped>
+.codeblock {
+  text-align: left;
+  font-weight: bold;
+}
 .objPropsView {
   margin: 0 auto;
   width: 70%;

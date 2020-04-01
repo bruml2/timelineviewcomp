@@ -2,7 +2,10 @@
   <div id="app">
     <div id="app-nav">
       <img alt="Ruml portrait" src="@/assets/self-villa2013.20k.jpg" width="60">
-      <span id="app-title">The TimelineView Component</span>
+      <div id="app-title-version">
+        <span id="app-title">The TimelineView Component</span><br />
+        <span id="app-subtitle">and friends &nbsp; </span><span id="app-version">[{{version}}]</span>
+      </div>
       <div id="app-links">
         <!-- router/index.js: the views/*vue component to display for each route; -->
         <router-link to="/">Home</router-link> |
@@ -18,6 +21,16 @@
     </transition>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      version: process.env.VUE_APP_VERSION
+    }
+  }
+}
+</script>
 
 <style>
 * {
@@ -36,10 +49,20 @@
   align-items: center;
   padding: 10px 30px;
 }
-#app-title {
+#app-title-version {
   font-family: Palatino, "New Times Roman", Times, serif;
+  text-align: center;
+}
+#app-title {
   font-size: 1.7rem;
   font-weight: bold;
+}
+#app-subtitle {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+#app-version {
+  font-size: 0.8rem;
 }
 #app-nav {
   background-color: cornsilk;
