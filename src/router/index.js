@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+// import all router "view" components;
 import Home     from '../views/Home.vue'
 import Timeline from '../views/Timeline.vue'
 import TimeAxis from '../views/TimeAxis.vue'

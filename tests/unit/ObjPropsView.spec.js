@@ -2,6 +2,18 @@ import { mount } from '@vue/test-utils'
 import { ObjPropsView } from '../../src/components/ObjPropsView.js'
 
 describe('ObjPropsView component', () => {
+
+  test('is a Vue instance', () => {
+    const wrapper = mount(ObjPropsView)
+    expect(wrapper.isVueInstance()).toBeTruthy()
+  })
+
+  // snapshot testing;
+  test('renders correctly', () => {
+    const wrapper = mount(ObjPropsView)
+    expect(wrapper.element).toMatchSnapshot()
+  })
+  
   // mount with props??
   const wrapper = mount(ObjPropsView)
 

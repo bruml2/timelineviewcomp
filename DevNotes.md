@@ -2,9 +2,15 @@
 
 ### Work Plan
 
-#### Wed Apr 1  
+#### Sat Apr 4
 
- * find code block component
+ * removed prettier from eslint (again)
+ * copy mixinMarchxx to timelineviewcomp and delete
+ * refresh self on studioapp1
+ * create studio1 repo as new app
+
+#### Wed Apr 1
+
  * explore echart component
 
 #### Sat Mar 28
@@ -25,6 +31,7 @@
       "plugin:vue/essential",
       "eslint:recommended",
       // "@vue/prettier"
+
  * local to github repository:
    - create new github repo without README or gitignore
    - copy URL of new repo
@@ -41,9 +48,16 @@
 3. Create ErasMixin with tests.
 4. Create RangesMixin with tests (from original JS)
 
-### Testing best practices
+### ESlint
 
-See https://github.com/jest-community/eslint-plugin-jest
+/* eslint-disable no-unused-vars */
+
+### Jest Testing
+
+- Jest watch mode (only tests for changes)
+- See https://github.com/jest-community/eslint-plugin-jest
+- Setting up vue project for jest: see https://vue-test-utils.vuejs.org/guides/testing-single-file-components-with-jest.html
+- to use snapshot testing with Jest, you simply pass your serializable variable into expect and invoke toMatch(snapshot) on it.
 
 ### Follow-up
 
@@ -57,3 +71,7 @@ Excellent fast canvas-based line graphs, etc. https://github.com/leeoniya/uPlot
 https://github.com/ecomfe/awesome-echarts
 Echart timelines: https://echarts.apache.org/en/option.html#timeline
 echart vue component: https://github.com/xlsdg/vue-echarts-v3
+
+### Material Design UI components
+
+ * https://github.com/matsp/material-components-vue  very simple and clear

@@ -1,10 +1,15 @@
 <template>
   <div id="app">
     <div id="app-nav">
-      <img alt="Ruml portrait" src="@/assets/self-villa2013.20k.jpg" width="60">
+      <img
+        alt="Ruml portrait"
+        src="@/assets/self-villa2013.20k.jpg"
+        width="60"
+      />
       <div id="app-title-version">
         <span id="app-title">The TimelineView Component</span><br />
-        <span id="app-subtitle">and friends &nbsp; </span><span id="app-version">[{{version}}]</span>
+        <span id="app-subtitle">and friends &nbsp; </span
+        ><span id="app-version">[{{ version }}]</span>
       </div>
       <div id="app-links">
         <!-- router/index.js: the views/*vue component to display for each route; -->
@@ -16,7 +21,8 @@
         <router-link to="/docs">Documentation</router-link>
       </div>
     </div>
-    <transition name="fade" appear> <!-- name prefixes classes -->
+    <transition name="fade" appear>
+      <!-- name (fade) prefixes classes -->
       <router-view />
     </transition>
   </div>
@@ -26,9 +32,9 @@
 export default {
   data() {
     return {
-      version: process.env.VUE_APP_VERSION
+      version: process.env.VUE_APP_VERSION,
     }
-  }
+  },
 }
 </script>
 
@@ -82,10 +88,12 @@ export default {
 #app-links a.router-link-exact-active {
   color: #42b983;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .75s;
+.fade-enter- ctive,
+.fade-leave-active {
+  transition: o0pacity 0.75s;
 }
-.fade-enter, .fade-leave-to {
+.fade enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
