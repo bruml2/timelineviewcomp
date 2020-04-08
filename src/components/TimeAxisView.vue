@@ -1,5 +1,5 @@
 <template>
-  <!-- TimeAxisView component: v0.2 Mar 26 -->
+  <!-- TimeAxisView component: v0.3 Apr 4 -->
   <div class="timeAxisViewContainer" :id=viewID>
     <svg class="svg" :width="timeAxisObj.svgWidth + 'px'"
                      :height="timeAxisObj.timeAxisHeight + 'px'"
@@ -10,8 +10,8 @@
 </template>
 
 <script>
-// import * as d3 from 'd3'
-import { TimeAxisMixin } from '@/mixins/TimeAxisMixin.js'
+// d3 is imported in the mixin;
+import { TimeAxisMixin } from '../mixins/TimeAxisMixin.js'
 
 export default {
   name: "TimeAxisViewComponent",
@@ -52,7 +52,6 @@ export default {
     this.rootEl = document.getElementById(this.viewID)
     Object.assign(this.timeAxisObj, this.timeAxisPropObj)
     // console.log("mounted: svgWidth: ", this.timeAxisObj)
-    // drawTimeAxis(tl, axisContainerDiv, verticalSVGOffset)
     this.drawTimeAxis(this.timeAxisObj, this.rootEl, this.timeAxisObj.timeAxisVerticalOffset)
   },
   watch: {
@@ -60,9 +59,10 @@ export default {
       // immediate: true,  fires too soon to get rootEl
       deep: true,
       handler: function(newVal) {
+        console.log(`newVal: `, newVal)
         // newVal contains only the properties in timeAxisPropObj;
         Object.assign(this.timeAxisObj, newVal)
-        // console.log("TimeAxisView watch handler fired", this.timeAxisObj)
+        // console.log("TimeAxisView watch handler fired; timeAxisObj: ", this.timeAxisObj)
         this.drawTimeAxis(this.timeAxisObj, this.rootEl, this.timeAxisObj.timeAxisVerticalOffset)
       }
     }

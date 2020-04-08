@@ -1,14 +1,11 @@
 <template>
+  <!-- Home.vue  v0.3  Apr 4 -->
   <div class="home">
-    <h1>This is the Home view. [{{ builddate }}]</h1>
+    <div class="builddate">[built: {{ builddate }}]</div>
+    <div class="view">Home view</div>
 
-    <div id="btns">
-      <span>Demonstrating that changes within parent affect the TimelineView component below: &nbsp; &nbsp; </span>
-      <button class="button" @click="changeProperty">Change Title Value</button>
-      &nbsp; &nbsp;
-      <button class="button" @click="addProperty">Add a new property</button>
-      &nbsp; &nbsp;
-      <button class="button" @click="addEra">Add a new era</button>
+    <div class="desc">
+      The TimelineView component is a general-purpose history timeline intended to satisfy a wide range of needs. The two timelines on this page illustrate the original use for the javascript code in support of a Harvard College class in <i>The Hebrew Bible</i>. They also deomonstrate the interactive display of additional information.
     </div>
 
     <TimelineView timelineID="timelineA" :timeline="CB39overview" :tvcWidth="tvcWidth" :showProlog="true" />
@@ -17,7 +14,7 @@
 
     <div class="timeAxisView">
       <div class="desc">This is a TimeAxisView component; it responds to changes:
-        <button v-show="nextTickInterval" v-on:click="newHandler">Change tick interval to {{nextTickInterval}}</button>
+        <button v-show="nextTickInterval" @click="changeTickInterval">Change tick interval to {{nextTickInterval}}</button>
       </div>
       <TimeAxisView viewID="viewA" :time-axis-prop-obj="timeAxisViewProps"/>
     </div>
@@ -39,6 +36,7 @@ export default {
   data() {
     return {
       builddate: builddate,
+      tvcWidth: 1302, /* allows for temporary 1px border */
       CB39overview: {
         "name": "Hebrew Bible Overview Timeline",
         "dbKey": null,
@@ -52,7 +50,7 @@ export default {
         // features": { "showDatesCB": true,
         //              "showAllCB": true,
         //              "hideLabelsCB": true,
-        //              "hasInfoPanels": true },        
+        //              "hasInfoPanels": true },
         "erasArr": [
           /* start and stop are years; topY(0 to 1) placement of top within
               eraHeight; height is fraction of height(0 to 1); optional:
@@ -104,15 +102,28 @@ export default {
     }
   },
   methods: {
+    changeProperty() {
+      // changing a value in the timeline prop causes rerender;
+      this.CB39overview.title = 'Value changed'
+    },
+    addProperty() {
+      // a new property in the timeline does NOT cause a rerender;
+      // This DOES NOT WORK!!!
+      //    this.timelineA.newProperty = "newPropertyValue"
+      // MUST ASSIGN to the prop;
+      this.timelineA = Object.assign({}, this.CB39overview, {newProperty: "newPropertyValue"})
+    },
+    addEra() {
+      // does adding a new era cause a redrawing of the timeline?
+      this.CB39overview.erasArr.push({label: "Added era", start: 1922, stop: 1928, bgcolor: "#F5A9F2"})
+    },
     changeTickInterval() {
       console.log("changeTickInterval event fired")
       this.timeAxisViewProps.tickInterval -= this.changeTickDecrement
       this.nextTickInterval -= this.changeTickDecrement
     },
-    newHandler() {
-      console.log("changeTickInterval event fired")
-      this.timeAxisViewProps.tickInterval -= this.changeTickDecrement
-      this.nextTickInterval -= this.changeTickDecrement
+    changeStartYear() {
+      this.timeAxisPropObj = Object.assign({}, this.timeAxisPropObj, {startYear: 1940, tickInterval: 5})
     }
   }
 }
@@ -120,9 +131,28 @@ export default {
 
 <style>
 .home {
+  position: relative;
+  margin: 5px 0 80px 0;
+  padding: 20px;
   text-align: center;
+  border: 1px solid black;
+}
+ .home .builddate {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  font-size: 0.8rem;
+}
+ .home .view {
+  position: absolute;
+  top: 0.1rem;
+  left: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 .desc {
-  margin: 20px;
+  margin: 40px auto;
+  width: 70%;
+  text-align: left;
 }
 </style>

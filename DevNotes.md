@@ -2,10 +2,14 @@
 
 ### Work Plan
 
+#### Wed Apr 8
+
+ * TimeAxisView should work when props are undefined;
+
 #### Sat Apr 4
 
+ * make ErasMixin.js
  * removed prettier from eslint (again)
- * copy mixinMarchxx to timelineviewcomp and delete
  * refresh self on studioapp1
  * create studio1 repo as new app
 
@@ -54,6 +58,7 @@
 
 ### Jest Testing
 
+- https://lmiller1990.github.io/vue-testing-handbook/#what-is-this-guide
 - Jest watch mode (only tests for changes)
 - See https://github.com/jest-community/eslint-plugin-jest
 - Setting up vue project for jest: see https://vue-test-utils.vuejs.org/guides/testing-single-file-components-with-jest.html
@@ -75,3 +80,9 @@ echart vue component: https://github.com/xlsdg/vue-echarts-v3
 ### Material Design UI components
 
  * https://github.com/matsp/material-components-vue  very simple and clear
+
+### Syntax-Highlighted Code Blocks
+
+ * Chris Fritz as components for VuePress for this
+ * https://github.com/chrisvfritz/vuepress-enhanced-examples
+ * vuepress-enhanced-examples/.vuepress/components/vue-example-simple/code-block.vue

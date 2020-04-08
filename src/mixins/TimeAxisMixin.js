@@ -1,4 +1,5 @@
 /* TimeAxisMixin.js  v. 0.3  Mar 28 2020 */
+/* Apr 8: drawTimeAxis() returns if no start/stop/interval values */
 import * as d3 from "d3";
 
 export const TimeAxisMixin = {
@@ -54,10 +55,17 @@ export const TimeAxisMixin = {
       // .tickSize(tl.timeAxisTickSize);
     },
     drawTimeAxis(tl, axisContainerDiv, verticalSVGOffset) {
-      if (!tl.timeAxisPropsValid) {
-        const reqProps = [ "startYear", "stopYear", "tickInterval"]
-        reqProps.push("foo")
-        tl.timeAxisPropsValid = true
+      // axisContainerDiv is a div el containing an svg
+      //   containing a g with class "timeAxisGrp" (this.rootEl);
+      // verticalSVGOffset is the translate distance from the
+      //   top of the svg container (tl.eraTopMargin + tl.eraHeight +
+      //   tl.timeAxisVerticalOffset);
+      if (!Number.isInteger(tl.startYear)    ||
+          !Number.isInteger(tl.stopYear)     ||
+          !Number.isInteger(tl.tickInterval) ||
+          tl.startYear >= tl.stopYear) {
+        console.log("early return from drawTimeAxis", tl)
+        return
       }
       // uses tl.startYear, tl.stopYear, tl.tickInterval;
       tl.timeScaleFn = this.getTimeScaleFn(tl);
@@ -65,11 +73,6 @@ export const TimeAxisMixin = {
       tl.timeAxisSVGFn = this.getTimeAxisSVGFn(tl);
       // uses tl.timeAxisSVGFn, tl.timeAxisStroke, tl.timeAxisStrokeWidth,
       //      tl.timeAxisFontFamily, tl.timeAxisFontSize;
-      // axisContainerDiv is a div el containing an svg
-      //   containing a g with class "timeAxisGrp" (this.rootEl);
-      // verticalSVGOffset is the translate distance from the
-      //   top of the svg container (tl.eraTopMargin + tl.eraHeight +
-      //   tl.timeAxisVerticalOffset);
       d3.select(axisContainerDiv)
         .select(".timeAxisGrp")
         // default position is at top of SVG; move to bottom;
