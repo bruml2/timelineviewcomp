@@ -2,6 +2,7 @@
 -->
 <template>
   <!-- version 1.1 Mar 27 2020; transfer to TimelineViewComp -->
+  <!-- v1.2 Apr 14: drawTimeAxis: fix for mixin; axis at default vertical position; -->
   <!-- ToDo: 1) should work with timeline prop of {}; 2) put default values in code?? -->
   <div class="timelineViewContainer"
        :id="timelineID"
@@ -80,7 +81,7 @@
           /* this component renders the title/subtitle but not a timeline (in the
             tvTimeline div) unless the timeline prop validates with:
               startYear stopYear tickInterval */
-          /* 
+          /*
           "tlID": "defaultTimelineID in tl object",
           "dbKey": null,
           "title":        "AP United States History",
@@ -100,7 +101,7 @@
           "svgSideMargin":  20,
           "eraTopMargin":   30,
           // eraHeight is default;
-          "eraHeight":      320, 
+          "eraHeight":      320,
           "timeAxisHeight": 50,
           "timeAxisVerticalOffset": 20,
           "timeAxisStroke": "black",
@@ -140,22 +141,6 @@
       this.rootEl = document.getElementById(this.timelineID)
       console.log(`============ ${this.timelineID} (in mounted hook): timeline prop: `, this.timeline)
 
-      if (this.tl.showUSPresidents == true){
-        console.log("  Fetching US Presidents file")
-        fetch("USPresidentsArr.json", {mode: 'no-cors'})
-        .then(response => {
-          if (!response.ok) { throw new Error("HTTP error " + response.status); }
-          return response.json();
-        })
-        .then(json => {
-          this.usPresidentsArr = json;
-        })
-        .catch(function (error) {
-          // this.dataError = true;
-          throw new Error("fetch error: " + error);
-        })
-      }
-
       // Add missing title, subtitle; check for start/stop/tickInt;
       if (this.tlPropIsValid(this.timeline)) {
         // merge timeline prop into this.tl as target;
@@ -168,10 +153,10 @@
     },
     computed: {
       svgHeight: function () {
-        return this.tl.eraTopMargin + 
+        return this.tl.eraTopMargin +
                this.tl.eraHeight +
                this.tl.timeAxisHeight
-      } 
+      }
     },
     watch: {
       // NB that ADDING a property to the prop will NOT cause a re-render!!
@@ -210,7 +195,7 @@
         if (!prop.startYear || !prop.stopYear || !prop.tickInterval ||
             !(prop.stopYear > prop.startYear) || prop.startYear % 5 != 0) {
           console.log("bad: ", prop.startYear, prop.stopYear, prop.tickInterval)
-          return false 
+          return false
         }
         return true
       },
@@ -220,19 +205,17 @@
         this.removeEmptyHeaderFooter(this.tl)
         this.removeExistingEras(this.tl)
         this.initializeComponent(this.tl)
-        this.drawTimeAxis(this.tl) /* need tl.timeScaleFn() */
+        this.drawTimeAxis(this.tl, this.rootEl) /* need tl.timeScaleFn() */
         if (Object.keys(this.tl).includes("erasArr") && this.tl.erasArr.length > 0) {
           this.normalizeEras(this.tl)
           this.drawEras(this.tl)
           this.drawEraLabelsAsHTML(this.tl)
           this.drawEraDates(this.tl)
         }
-        if (this.tl.usPresidentsArr) {
+        if (this.tl.showUSPresidents) {
+          // in mixin;
           this.drawUSPresidents(this.tl)
         }
-      },
-      drawUSPresidents(tl) {
-        console.log("In drawUSPresidents()", tl)
       },
       removeEmptyHeaderFooter(tl) {
         if (tl.title.trim().length +  tl.subtitle.trim().length === 0) {
@@ -314,13 +297,13 @@
 //                   "translate(0, " + (tl.eraTopMargin + tl.eraHeight +
 //                                      tl.timeAxisVerticalOffset) + ")")
 //             .call(timeAxisFn);
-// 
+//
 //         d3.select(this.rootEl).selectAll(".timeAxisGrp line, .timeAxisGrp path")
 //             .attr("stroke", tl.timeAxisStroke)
 //             .attr("stroke-width", tl.timeAxisStrokeWidth)
 //             .attr("fill", "none")
 //             .attr("shape-rendering", "crispEdges");
-// 
+//
 //         d3.select(this.rootEl).selectAll(".timeAxisGrp text")
 //             .attr("font-family", tl.timeAxisFontFamily)
 //             .attr("font-size", tl.timeAxisFontSize)
@@ -397,7 +380,7 @@
             .append("span")
             .style("position", "absolute")
             .style("visibility", "hidden");
-        // nested function ============================== 
+        // nested function ==============================
         const getLeftAndStoreWidth = function(d, self) {
           // does widest word overflow? Sort by length descending;
           let words = d.label.split(/ /);
@@ -421,7 +404,7 @@
                left of start year; */
             d.width = longestWordWidth + 2;
             // left is to the left of start by half of excess width + 2;
-            let left = Math.ceil(tl.timeScaleFn(d.start) - 
+            let left = Math.ceil(tl.timeScaleFn(d.start) -
                             ((longestWordWidth - widthOfEra + 2) / 2));
             if (self.showLabelSizes) console.log("Doesn't fit: " + longestWord + " starts " + (tl.timeScaleFn(d.start) - left) + " to the left of startYear")
             return left + "px";
@@ -467,7 +450,7 @@
         drawGroupOfDates("start", this)
         drawGroupOfDates("stop", this)
       },
-    }    
+    }
   }
 </script>
 
@@ -573,7 +556,7 @@ svg {
   column-count: 3;
   -moz-column-count: 3;
   -webkit-column-count: 3;
-  
+
 }
 .infoDisplay p, .infoDisplay2 p, .discPanel p {
   text-indent: 1em;

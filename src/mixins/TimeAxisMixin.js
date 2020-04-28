@@ -55,6 +55,11 @@ export const TimeAxisMixin = {
       // .tickSize(tl.timeAxisTickSize);
     },
     drawTimeAxis(tl, axisContainerDiv, verticalSVGOffset) {
+      console.log(`drawTimeAxis: verticalSVGOffset: ${verticalSVGOffset}`)
+      const svgElHeight = axisContainerDiv.querySelector('svg').height.baseVal.value
+      console.log(`drawTimeAxis: svgElHeight: ${svgElHeight}`)
+      const axisTranslateHeight = svgElHeight - 30
+      console.log(`drawTimeAxis: axisTranslateHeight: ${axisTranslateHeight}`)
       // axisContainerDiv is a div el containing an svg
       //   containing a g with class "timeAxisGrp" (this.rootEl);
       // verticalSVGOffset is the translate distance from the
@@ -76,7 +81,8 @@ export const TimeAxisMixin = {
       d3.select(axisContainerDiv)
         .select(".timeAxisGrp")
         // default position is at top of SVG; move to bottom;
-        .attr("transform", `translate(0, ${verticalSVGOffset})`)
+        .attr("transform", `translate(0, ${axisTranslateHeight})`)
+        // .attr("transform", `translate(0, ${verticalSVGOffset})`)
         .call(tl.timeAxisSVGFn);
 
       d3.select(axisContainerDiv)

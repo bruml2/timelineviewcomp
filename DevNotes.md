@@ -86,3 +86,13 @@ echart vue component: https://github.com/xlsdg/vue-echarts-v3
  * Chris Fritz as components for VuePress for this
  * https://github.com/chrisvfritz/vuepress-enhanced-examples
  * vuepress-enhanced-examples/.vuepress/components/vue-example-simple/code-block.vue
+
+### SVG to image conversion
+
+ * for printing finished timelines;
+ * https://sharp.pixelplumbing.com/
+
+### For resizing timelines to container size
+
+ * https://github.com/paulpflug/vue-mixins
+ * getViewportSize, etc.

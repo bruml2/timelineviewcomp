@@ -25,6 +25,10 @@ export default {
     viewID: {
       type: String,
       default: "soleView"
+    },
+    showUSPresidents: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -69,7 +73,8 @@ export default {
   },
   methods: {
     /* now in TimeAxisMixin */
-  }
+    /* in USPresidentsMixin */
+}
 }
 </script>
 
