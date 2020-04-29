@@ -34,6 +34,19 @@
       </div>
       <TimeAxisView viewID="timeAxisB" :time-axis-prop-obj="timeAxisViewProps"/>
     </div>
+
+    <div class="timeAxisView">
+      <div class="desc">This is a TimeAxisView component which shows the US Presidents. It has a timeAxisPropObj prop of<br />
+        <div class="props">
+          <ul>
+            <li v-for="(value, prop, idx) in timeAxisViewPropsC" :key="idx">
+              {{ idx+1 }}. &nbsp; <b>{{ prop }}:</b> {{ value }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <TimeAxisView viewID="timeAxisC" :time-axis-prop-obj="timeAxisViewPropsC"/>
+    </div>
   </div>
 </template>
 
@@ -59,6 +72,17 @@ export default {
         timeAxisHeight: 100,
         // default is 25; increase by add'l timeAxisHeight;
         timeAxisVerticalOffset: 75
+      },
+      timeAxisViewPropsC: {
+        startYear: 1900,
+        stopYear: 2000,
+        tickInterval: 10,
+        svgWidth: 1000,
+        // default is 50;
+        timeAxisHeight: 100,
+        // default is 25; increase by add'l timeAxisHeight;
+        timeAxisVerticalOffset: 75,
+        showUSPresidents: true
       },
       timeAxisDefaults: {
         startYear: 1900,

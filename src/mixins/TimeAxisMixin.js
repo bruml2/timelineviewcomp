@@ -55,13 +55,8 @@ export const TimeAxisMixin = {
       // .tickSize(tl.timeAxisTickSize);
     },
     drawTimeAxis(tl, axisContainerDiv, verticalSVGOffset) {
-      console.log(`drawTimeAxis: verticalSVGOffset: ${verticalSVGOffset}`)
-      const svgElHeight = axisContainerDiv.querySelector('svg').height.baseVal.value
-      console.log(`drawTimeAxis: svgElHeight: ${svgElHeight}`)
-      const axisTranslateHeight = svgElHeight - 30
-      console.log(`drawTimeAxis: axisTranslateHeight: ${axisTranslateHeight}`)
-      // axisContainerDiv is a div el containing an svg
-      //   containing a g with class "timeAxisGrp" (this.rootEl);
+      // axisContainerDiv is a div el (this.rootEl) containing
+      // an svg containing a g with class "timeAxisGrp" ;
       // verticalSVGOffset is the translate distance from the
       //   top of the svg container (tl.eraTopMargin + tl.eraHeight +
       //   tl.timeAxisVerticalOffset);
@@ -81,22 +76,24 @@ export const TimeAxisMixin = {
       d3.select(axisContainerDiv)
         .select(".timeAxisGrp")
         // default position is at top of SVG; move to bottom;
-        .attr("transform", `translate(0, ${axisTranslateHeight})`)
-        // .attr("transform", `translate(0, ${verticalSVGOffset})`)
+        .attr("transform", `translate(0, ${verticalSVGOffset})`)
         .call(tl.timeAxisSVGFn);
-
       d3.select(axisContainerDiv)
         .selectAll(".timeAxisGrp line, .timeAxisGrp path")
         .attr("stroke", tl.timeAxisStroke)
         .attr("stroke-width", tl.timeAxisStrokeWidth)
         .attr("fill", "none")
         .attr("shape-rendering", "crispEdges");
-
       d3.select(axisContainerDiv)
         .selectAll(".timeAxisGrp text")
         .attr("font-family", tl.timeAxisFontFamily)
         .attr("font-size", tl.timeAxisFontSize)
         .attr("text-rendering", "optimizeLegibility");
+      if (tl.showUSPresidents) {
+        const svgEl = axisContainerDiv.querySelector('svg')
+        // drawUSPresidents(tl, svgEl, timeScaleFn, presVOffset, nameFontSize)
+        this.drawUSPresidents(tl, svgEl, tl.timeScaleFn, verticalSVGOffset - 25)
+      }
     }
   }
 };

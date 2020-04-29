@@ -12,10 +12,11 @@
 <script>
 // d3 is imported in the mixin;
 import { TimeAxisMixin } from '../mixins/TimeAxisMixin.js'
+import { USPresidentsMixin } from '../mixins/USPresidentsMixin.js'
 
 export default {
   name: "TimeAxisViewComponent",
-  mixins: [TimeAxisMixin],
+  mixins: [TimeAxisMixin, USPresidentsMixin],
   props: {
     // typcially: startYear, stopYear, tickInterval, svgWidth only;
     timeAxisPropObj: {
